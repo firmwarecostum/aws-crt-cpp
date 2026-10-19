@@ -444,14 +444,10 @@ install(FILES "${GENERATED_ROOT_DIR}/${PROJECT_NAME}-config-version.cmake"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}/"
     COMPONENT Development)
 
-if(NOT CMAKE_CROSSCOMPILING)
-    if(BUILD_TESTING)
-        add_subdirectory(tests)
-
-        if(NOT BYO_CRYPTO)
-            add_subdirectory(bin/elasticurl_cpp)
-            add_subdirectory(bin/mqtt5_app)
-            add_subdirectory(bin/mqtt5_canary)
-        endif()
-    endif()
-endif()
+include(CTest)
+if (BUILD_TESTING)
+    add_subdirectory(tests)
+    add_subdirectory(bin/elasticurl_cpp)
+    add_subdirectory(bin/mqtt5_app)
+    add_subdirectory(bin/mqtt5_canary)
+endif ()
